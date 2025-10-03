@@ -1,7 +1,6 @@
-
 'use client';
 
-import css from '../page.module.css';
+import css from '../../../page.module.css';
 import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
@@ -12,28 +11,26 @@ import Modal from '@/components/Modal/Modal';
 import NoteForm from '@/components/NoteForm/NoteForm';
 import NoteList from '@/components/NoteList/NoteList';
 
-
 type Props = {
   initialPage: number;
   initialSearchValue: string;
+  initialTag?: string;             
 };
 
-export default function NotesClient({ initialPage, initialSearchValue }: Props) {
+export default function NotesClient({ initialPage, initialSearchValue, initialTag }: Props) {
   const [page, setPage] = useState(initialPage);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchValue, setSearchValue] = useState(initialSearchValue);
- 
+
   const { data } = useQuery<NoteResponse>({
-    queryKey: ['task', page, searchValue],
-    queryFn: () => fetchNotes(page, searchValue),
+    queryKey: ['notes', { page, searchValue, tag: initialTag }],   
+    queryFn: () => fetchNotes(page, searchValue, initialTag),    
     placeholderData: keepPreviousData,
-      refetchOnMount: false,
-    
+    refetchOnMount: false,
   });
 
   const totalPages = data?.totalPages ?? 0;
 
-  
   const handleChange = useDebouncedCallback((val: string) => {
     setSearchValue(val);
     setPage(1);

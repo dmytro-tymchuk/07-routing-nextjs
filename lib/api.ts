@@ -9,14 +9,20 @@ export type NoteResponse = {
 }
 
 type SingleNoteResponse = {
-  note: Note
+    note: Note
 }
 
-const fetchNotes = async (page:number, searchValue: string):Promise<NoteResponse> => {
-    const res = await axios.get<NoteResponse>(`https://notehub-public.goit.study/api/notes?page=${page}&perPage=12&search=${searchValue}`, {
+const fetchNotes = async (page:number = 1, searchValue: string = "", tag?:string):Promise<NoteResponse> => {
+    const res = await axios.get<NoteResponse>(`https://notehub-public.goit.study/api/notes`, {
         headers: {
             Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`
-        }
+        },
+        params: {
+        page,
+        perPage: 12,
+        ...(searchValue ? { search: searchValue } : {}),
+        ...(tag ? { tag } : {}), 
+      }
     })
     return res.data
 }

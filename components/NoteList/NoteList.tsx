@@ -19,7 +19,7 @@ const NoteList = ({ notes }: NoteListProps) => {
   const deleteMutation = useMutation({
     mutationFn: (noteId: string) => deleteNote(noteId),
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey:["task"]})
+      queryClient.invalidateQueries({queryKey:["notes"]})
     }
   })
 

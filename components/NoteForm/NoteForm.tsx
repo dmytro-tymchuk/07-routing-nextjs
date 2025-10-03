@@ -35,7 +35,7 @@ const NoteForm = ({ onClose }: NoteFormProps) => {
   const mutation = useMutation({
     mutationFn: (newNote: CreateNoteRequest) => createNote(newNote),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["task"] })
+      queryClient.invalidateQueries({ queryKey: ["notes"] })
       onClose();
     }
   })
