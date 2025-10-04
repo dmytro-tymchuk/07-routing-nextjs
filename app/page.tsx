@@ -1,3 +1,4 @@
+
 import css from "./page.module.css"
 
 export default function Home() {
@@ -15,7 +16,7 @@ export default function Home() {
       notes. With support for keyword search and structured organization,
       NoteHub offers a streamlined experience for anyone who values clarity
       and productivity.
-    </p>
+        </p>
 </div>
 </main>
   )
