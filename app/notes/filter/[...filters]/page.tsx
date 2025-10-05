@@ -2,7 +2,6 @@ import { QueryClient, dehydrate, HydrationBoundary } from '@tanstack/react-query
 import { fetchNotes } from '@/lib/api';
 import NotesClient from './Notes.client';
 import css from '../../../page.module.css';
-import SidebarNotes from '@/components/SidebarNotes/SidebarNotes';
 
 type PageProps = {
   params: Promise<{ filters: string[] }>;
