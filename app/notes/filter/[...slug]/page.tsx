@@ -4,13 +4,13 @@ import NotesClient from './Notes.client';
 import css from '../../../page.module.css';
 
 type PageProps = {
-  params: Promise<{ filters: string[] }>;
+  params: Promise<{ slug: string[] }>;
   searchParams?: { page?: string; searchValue?: string };
 };
 
 export default async function NotesByFilter({ params, searchParams }: PageProps) {
-    const { filters } = await params;
-    const [tag] = filters
+    const { slug } = await params;
+    const [tag] = slug
     const sp = await searchParams;
 
   const page = Number(sp?.page ?? 1);
